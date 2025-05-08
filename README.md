@@ -217,33 +217,35 @@ vercel
 2. Create a new Web Service with these settings:
    - Name: `hackosquad-beta`
    - Region: `Oregon (US West)`
-   - Root Directory: `server`d`
+   - Root Directory: `server`
    - Build Command: `npm run build`
    - Start Command: `npm start`
-   - Health Check Path: `/healthz``NODE_VERSION=18.x`
-   - Environment Variables:type
+   - Health Check Path: `/healthz`
+   - Auto-Deploy: Yes
+   - Environment Variables:
      ```
-     NODE_VERSION=18.x:
-     NODE_ENV=production   - Go to "New+" > "PostgreSQL"
+     NODE_VERSION=18.x
+     NODE_ENV=production
+     NPM_CONFIG_PRODUCTION=false
      ```
 
-3. Set up PostgreSQL on Render:al Database URL"
+3. Set up PostgreSQL on Render:
    - Go to "New+" > "PostgreSQL"
-   - Choose free tier Render:
-   - Create database   - Go to your Web Service
+   - Choose free tier
+   - Create database
    - Copy the "External Database URL"
-e copied PostgreSQL URL
+
 4. Configure environment variables on Render:
    - Go to your Web Service
    - Add all variables from your `.env` file
-   - Set DATABASE_URL to the copied PostgreSQL URLion string from Render dashboard
+   - Set DATABASE_URL to the copied PostgreSQL URL
 
 ### Database Setup on Render
 ```bash
-1. Get your database connection string from Render dashboard/db/schema.sql
+1. Get your database connection string from Render dashboard
 
 2. Import schema to Render PostgreSQL:
-```bash Update Frontend API URL
+```bash
 psql your_render_postgres_url < server/db/schema.sql
 ```
 
