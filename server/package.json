@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node index.js",
-    "build": "npm ci --unsafe-perm && npm rebuild bcrypt --build-from-source"
+    "build": "npm ci --production=false && npm rebuild bcrypt --build-from-source"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",

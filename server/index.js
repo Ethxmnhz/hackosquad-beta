@@ -12,11 +12,16 @@ const { Pool } = pg;
 
 // Database configuration
 const pool = new Pool({
-  user: 'offic',
-  host: 'localhost',
-  database: 'hackosquad',
-  password: 'minhaz123',
-  port: 5432,
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
+
+// Log database connection details for debugging
+console.log('Attempting to connect to database with:', {
+  connectionString: process.env.DATABASE_URL?.split('@')[1], // Only log the host part
+  ssl: true
 });
 
 app.use(cors());
