@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth/dist/index.esm.js';
-import { getFirestore } from 'firebase/firestore/lite';
-import { getStorage } from 'firebase/storage/dist/index.esm.js';
+import { getAuth } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
+import { getStorage } from 'firebase/storage';
 
 // Validate required environment variables
 const requiredEnvVars = [

@@ -6,13 +6,17 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),
-      'firebase/firestore': 'firebase/firestore/lite',
-      'firebase/auth': 'firebase/auth/dist/index.esm.js',
-      'firebase/storage': 'firebase/storage/dist/index.esm.js'
+      '@': path.resolve(__dirname, './src')
     }
   },
+  optimizeDeps: {
+    include: ['firebase/app', 'firebase/auth', 'firebase/firestore', 'firebase/storage']
+  },
   build: {
-    sourcemap: true
+    sourcemap: true,
+    commonjsOptions: {
+      include: [/node_modules/],
+      transformMixedEsModules: true
+    }
   }
 });
