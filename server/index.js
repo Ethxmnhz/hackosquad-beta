@@ -22,6 +22,11 @@ const pool = new Pool({
 app.use(cors());
 app.use(express.json());
 
+// Health check endpoint
+app.get('/healthz', (req, res) => {
+  res.status(200).json({ status: 'healthy' });
+});
+
 // Test database connection
 pool.connect((err, client, done) => {
   if (err) {

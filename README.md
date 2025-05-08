@@ -178,6 +178,106 @@ hackosquad/
    - User management
    - Platform oversight
 
+## Deployment
+
+### Frontend Deployment (Vercel)
+
+1. Create a [Vercel](https://vercel.com) account
+2. Navigate to frontend directory:
+```bash
+cd project
+```
+
+3. Deploy with Vercel CLI:
+```bash
+vercel
+
+# Answer the CLI prompts:
+? Set up and deploy? [Y/n] y
+? Which scope should contain your project? [your-username]'s projects
+? Link to existing project? [Y/n] n
+? What's your project's name? [project-name]
+? In which directory is your code located? ./
+
+# Vercel will then:
+# 1. Create the project
+# 2. Deploy your code
+# 3. Provide you with deployment URLs
+```
+
+4. Configure environment variables:
+   - Go to Vercel Dashboard > Your Project > Settings > Environment Variables
+   - Add all variables from your `.env` file
+
+5. Your frontend will be deployed at: `https://[project-name].vercel.app`
+
+### Backend Deployment (Render)
+
+1. Create a [Render](https://render.com) account (free tier)
+2. Create a new Web Service with these settings:
+   - Name: `hackosquad-beta`
+   - Region: `Oregon (US West)`
+   - Root Directory: `server`d`
+   - Build Command: `npm run build`
+   - Start Command: `npm start`
+   - Health Check Path: `/healthz``NODE_VERSION=18.x`
+   - Environment Variables:type
+     ```
+     NODE_VERSION=18.x:
+     NODE_ENV=production   - Go to "New+" > "PostgreSQL"
+     ```
+
+3. Set up PostgreSQL on Render:al Database URL"
+   - Go to "New+" > "PostgreSQL"
+   - Choose free tier Render:
+   - Create database   - Go to your Web Service
+   - Copy the "External Database URL"
+e copied PostgreSQL URL
+4. Configure environment variables on Render:
+   - Go to your Web Service
+   - Add all variables from your `.env` file
+   - Set DATABASE_URL to the copied PostgreSQL URLion string from Render dashboard
+
+### Database Setup on Render
+```bash
+1. Get your database connection string from Render dashboard/db/schema.sql
+
+2. Import schema to Render PostgreSQL:
+```bash Update Frontend API URL
+psql your_render_postgres_url < server/db/schema.sql
+```
+
+1. Update the API URL in frontend `.env`:
+```
+VITE_API_URL=https://your-render-app.onrender.com/api
+```
+
+2. Redeploy frontend:
+```bash
+cd project
+vercel --prod
+```
+
+### Free Hosting Limits
+
+- Vercel (Frontend)
+  - Unlimited static site deployments
+  - Automatic HTTPS
+  - Continuous deployment from Git
+
+- Render (Backend + Database)
+  - Free tier includes:
+  - 750 hours of running time per month
+  - Automatic HTTPS
+  - 400GB egress bandwidth
+  - PostgreSQL: 1GB storage, auto-backup
+  - Spins down after 15 minutes of inactivity
+  - Wakes up automatically on request
+
+Your application will be available at:
+- Frontend: `https://your-app.vercel.app`
+- Backend: `https://your-app.onrender.com`
+
 ## Contributing
 
 1. Fork the repository
